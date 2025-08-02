@@ -33,4 +33,5 @@
 /Chapter_13/colorSelector
 /Chapter_13/PythonColorSelectorUI/venv
 /Chapter_14/TaskCreation_CMSIS_RTOSv2
-*/.cproject
+.settings
+.cproject
