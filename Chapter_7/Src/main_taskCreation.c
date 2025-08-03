@@ -58,15 +58,15 @@ int main(void)
 
 	//using an inlined if statement with an infinite while loop to stop in case
 	//the task wasn't created successfully
-	if (xTaskCreate(GreenTask, "GreenTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL) != pdPASS){ while(1); }
+	if (xTaskCreate(GreenTask, "GreenTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, NULL) != pdPASS){ while(1); }
 
 	//using an assert to ensure proper task creation
-	assert_param(xTaskCreate(BlueTask, "BlueTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &blueTaskHandle) == pdPASS);
+	assert_param(xTaskCreate(BlueTask, "BlueTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, &blueTaskHandle) == pdPASS);
 
 	//xTaskCreateStatic returns task hanlde
 	//always passes since memory was statically allocated
 	xTaskCreateStatic(	RedTask, "RedTask", STACK_SIZE, NULL,
-						tskIDLE_PRIORITY + 1,
+						tskIDLE_PRIORITY + 2,
 						RedTaskStack, &RedTaskTCB);
 
 	//start the scheduler - shouldn't return unless there's a problem
@@ -80,6 +80,7 @@ int main(void)
 
 void GreenTask(void *argument)
 {
+	vTaskDelay(200/ portTICK_PERIOD_MS);
 	SEGGER_SYSVIEW_PrintfHost("Task1 running \
 							   while Green LED is on\n");
 	GreenLed.On();
@@ -108,12 +109,12 @@ void BlueTask( void* argument )
 void RedTask( void* argument )
 {
 	uint8_t firstRun = 1;
-
+	SEGGER_SYSVIEW_PrintfHost("RedTaskRunning 1\n");
 	while(1)
 	{
 		lookBusy();
 
-		SEGGER_SYSVIEW_PrintfHost("RedTaskRunning\n");
+		SEGGER_SYSVIEW_PrintfHost("RedTaskRunning 2\n");
 		RedLed.On();
 		vTaskDelay(500/ portTICK_PERIOD_MS);
 		RedLed.Off();

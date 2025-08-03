@@ -29,13 +29,13 @@ static StaticTask_t RedTaskTCB;
 int main(void)
 {
 	HWInit();
-
+	SEGGER_SYSVIEW_Conf();
 	//using an inlined if statement with an infinite while loop to stop in case
 	//the task wasn't created successfully
 	if (xTaskCreate(GreenTask, "GreenTask", STACK_SIZE, NULL, tskIDLE_PRIORITY + 2, NULL) != pdPASS){ while(1); }
 
 	//using an assert to ensure proper task creation
-	assert_param(xTaskCreate(BlueTask, "BlueTask", STACK_SIZE *100, NULL, tskIDLE_PRIORITY + 1, &blueTaskHandle) == pdPASS);
+	assert_param(xTaskCreate(BlueTask, "BlueTask", 50 * STACK_SIZE, NULL, tskIDLE_PRIORITY + 1, &blueTaskHandle) == pdPASS);
 
 	//xTaskCreateStatic returns task hanlde
 	//always passes since memory was statically allocated

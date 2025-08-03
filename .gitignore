@@ -35,3 +35,4 @@
 /Chapter_14/TaskCreation_CMSIS_RTOSv2
 .settings
 .cproject
+*.launch

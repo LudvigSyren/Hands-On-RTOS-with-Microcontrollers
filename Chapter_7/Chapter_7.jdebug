@@ -22,7 +22,7 @@ void OnProjectLoad (void) {
   //
   // User settings
   //
-  File.Open ("C:/projects/packtBookRTOS/freeRTOS_Nucleo767/Debug/freeRTOS_Nucleo767.elf");
+  File.Open ("C:\Users\LudvigPHD\Hands-On-RTOS-with-Microcontrollers\Chapter_7\TaskCreationBuild\Chapter_7_TaskCreationBuild.elf");
 }
 
 /*********************************************************************
